@@ -6,3 +6,5 @@ Some important ideas are:
 - A "one-time setup" meaning users should never have to open the software after setup.
 - Lightweight, meaning the program is small and robust.
 - Optimal network/system performance, not noticeably affecting the user's experience.
+
+![ui design](i.imgur.com/NL29d89.png)
