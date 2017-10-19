@@ -7,4 +7,4 @@ Some important ideas are:
 - Lightweight, meaning the program is small and robust.
 - Optimal network/system performance, not noticeably affecting the user's experience.
 
-![ui design](i.imgur.com/NL29d89.png)
+![ui design](http://i.imgur.com/NL29d89.png)
