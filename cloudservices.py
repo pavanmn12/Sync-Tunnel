@@ -1,6 +1,7 @@
 from pydrive.drive import GoogleDrive
 from pydrive.auth import GoogleAuth
 
+
 class CloudService:
     def zipFolder(self, zipname, directory):            
     	zipobj = zipfile.ZipFile(zipname + '.zip', 'w', zipfile.ZIP_DEFLATED)

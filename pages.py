@@ -6,19 +6,19 @@ from itertools import count
 from enum import Enum
 import datetime
 
+
 # Image Button for Selection
 class StorageBanner(Frame):
     def __init__(self, parent, *args, **kwargs):
         Frame.__init__(self, parent)
         self.img = PhotoImage(*args, **kwargs)
-        self.button = Button(self, image = self.img, compound=CENTER, bg="white")
+        self.button = Button(self, image=self.img, compound=CENTER, bg="white")
         self.button.image = self.img
         self.button.pack()
 
 
 # Label that displays images, and plays them if they are gifs
 class ImageLabel(Label):
-    
     def load(self, im):
         if isinstance(im, str):
             im = Image.open(im)
