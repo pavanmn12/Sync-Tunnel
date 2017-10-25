@@ -6,19 +6,19 @@ from itertools import count
 from enum import Enum
 import datetime
 
-
 # Image Button for Selection
 class StorageBanner(Frame):
     def __init__(self, parent, *args, **kwargs):
         Frame.__init__(self, parent)
         self.img = PhotoImage(*args, **kwargs)
-        self.button = Button(self, image=self.img, compound=CENTER, bg="white")
+        self.button = Button(self, image = self.img, compound=CENTER, bg="white")
         self.button.image = self.img
         self.button.pack()
 
 
 # Label that displays images, and plays them if they are gifs
 class ImageLabel(Label):
+    
     def load(self, im):
         if isinstance(im, str):
             im = Image.open(im)
@@ -107,7 +107,9 @@ class LoadingPage(Frame):
 class MainPage(Frame):
 	def __init__(self, parent):
 		Frame.__init__(self, parent, bg = 'white')
-		
+		self.buttons = []
+
+
 		self.logbox = Logbox(self)
 		self.logbox.place(relx=0.07, rely=0.05, relheight=0.19, relwidth=0.83)
 		self.logbox.configure(background="#808080")
@@ -258,6 +260,7 @@ class MainPage(Frame):
 		self.monday_button.configure(relief=GROOVE)
 		self.monday_button.configure(text='''Not Syncing''')
 		self.monday_button.configure(command = self.monday_button.toggleSync)
+		self.buttons.append(self.monday_button)
 
 		self.tuesday_frame = Frame(self.schedule_frame)
 		self.tuesday_frame.place(relx=0.16, rely=0.26, relheight=0.65, relwidth=0.13)
@@ -282,6 +285,7 @@ class MainPage(Frame):
 		self.tuesday_button.configure(relief=GROOVE)
 		self.tuesday_button.configure(text='''Not Syncing''')
 		self.tuesday_button.configure(command = self.tuesday_button.toggleSync)
+		self.buttons.append(self.tuesday_button)
 
 		self.wednsday_frame = Frame(self.schedule_frame)
 		self.wednsday_frame.place(relx=0.3, rely=0.26, relheight=0.65, relwidth=0.13)
@@ -306,6 +310,7 @@ class MainPage(Frame):
 		self.wednsday_button.configure(relief=GROOVE)
 		self.wednsday_button.configure(text='''Not Syncing''')
 		self.wednsday_button.configure(command = self.wednsday_button.toggleSync)
+		self.buttons.append(self.wednsday_button)
 
 		self.thursday_frame = Frame(self.schedule_frame)
 		self.thursday_frame.place(relx=0.43, rely=0.26, relheight=0.65, relwidth=0.13)
@@ -330,6 +335,7 @@ class MainPage(Frame):
 		self.thursday_button.configure(relief=GROOVE)
 		self.thursday_button.configure(text='''Not Syncing''')
 		self.thursday_button.configure(command = self.thursday_button.toggleSync)
+		self.buttons.append(self.thursday_button)
 
 		self.friday_frame = Frame(self.schedule_frame)
 		self.friday_frame.place(relx=0.57, rely=0.26, relheight=0.65, relwidth=0.13)
@@ -354,6 +360,7 @@ class MainPage(Frame):
 		self.friday_button.configure(relief=GROOVE)
 		self.friday_button.configure(text='''Not Syncing''')
 		self.friday_button.configure(command = self.friday_button.toggleSync)
+		self.buttons.append(self.friday_button)
 
 		self.saturday_frame = Frame(self.schedule_frame, )
 		self.saturday_frame.place(relx=0.71, rely=0.26, relheight=0.65, relwidth=0.13)
@@ -378,6 +385,7 @@ class MainPage(Frame):
 		self.saturday_button.configure(relief=GROOVE)
 		self.saturday_button.configure(text='''Not Syncing''')
 		self.saturday_button.configure(command = self.saturday_button.toggleSync)
+		self.buttons.append(self.saturday_button)
 
 		self.sunday_frame = Frame(self.schedule_frame)
 		self.sunday_frame.place(relx=0.85, rely=0.26, relheight=0.65, relwidth=0.13)
@@ -402,6 +410,7 @@ class MainPage(Frame):
 		self.sunday_button.configure(relief=GROOVE)
 		self.sunday_button.configure(text='''Not Syncing''')
 		self.sunday_button.configure(command = self.sunday_button.toggleSync)
+		self.buttons.append(self.sunday_button)
 
 		self.monday_label = Label(self.schedule_frame)
 		self.monday_label.place(relx=0.03, rely=0.09, height=21, width=50)
