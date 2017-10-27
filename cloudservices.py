@@ -15,6 +15,7 @@ class CloudService:
 # Google Drive Module
 class GDrive(CloudService):
 	def __init__(self):
+		self.homepage = r"https://drive.google.com/drive/u/"
 		# Login
 		gauth = GoogleAuth()
 		gauth.LoadCredentialsFile("credentials.json")

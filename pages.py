@@ -6,6 +6,7 @@ from itertools import count
 from enum import Enum
 import datetime
 
+
 # Image Button for Selection
 class StorageBanner(Frame):
     def __init__(self, parent, *args, **kwargs):
@@ -488,8 +489,5 @@ class MainPage(Frame):
 		self.sunday_label.configure(highlightbackground="#d9d9d9")
 		self.sunday_label.configure(highlightcolor="black")
 		self.sunday_label.configure(text='''Sunday''')
-
-
-
 
 
