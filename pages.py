@@ -6,7 +6,6 @@ from itertools import count
 from enum import Enum
 import datetime
 
-
 # Image Button for Selection
 class StorageBanner(Frame):
     def __init__(self, parent, *args, **kwargs):
@@ -77,10 +76,13 @@ class Logbox(tkst.ScrolledText):
 		self.configure(state=DISABLED)
 
 	def add_msg(self, msg):
-		now = datetime.datetime.now()
-		self.configure(state = NORMAL)
-		self.insert(INSERT, msg + " - " + now.strftime("%H:%M %d-%m-%y"))
-		self.configure(state = DISABLED)
+		try:
+			now = datetime.datetime.now()
+			self.configure(state = NORMAL)
+			self.insert(INSERT, msg + " - " + now.strftime("%H:%M %d-%m-%y") + "\n")
+			self.configure(state = DISABLED)
+		except TclError:
+			pass
 
 # Page where the cloud service is selected
 class SelectPage(Frame):
@@ -227,6 +229,7 @@ class MainPage(Frame):
 		self.viewInWeb_button.configure(highlightcolor="black")
 		self.viewInWeb_button.configure(pady="0")
 		self.viewInWeb_button.configure(text='''View In Web''')
+
 
 		self.schedule_frame = Frame(self)
 		self.schedule_frame.place(relx=0.07, rely=0.33, relheight=0.19, relwidth=0.57)

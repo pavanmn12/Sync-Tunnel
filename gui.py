@@ -13,12 +13,16 @@ class App:
 		self.root.geometry("500x300")
 		self.root.configure(bg='white')
 
+		self.cloud = GDrive() # TODO: Add the selected option unstead of static GDrive
 		self.folders = []
-		self.cloud = None
+		# NOTICE: Add folders here for testing
+		self.folders.append("Put test folder here!")
 
 		# load JSON
-		with open('syncdays.json') as data_file:    
-			self.weekday_sync = json.load(data_file)
+		with open('options.json') as data_file:    
+			self.options = json.load(data_file)
+
+		self.weekday_sync = self.options["days"]
 
 		self.p1 = SelectPage(self.root)
 		self.p2 = LoadingPage(self.root)
@@ -29,34 +33,31 @@ class App:
 
 		# Make buttons have the JSON saved states
 		for button in self.p3.buttons:
-			if button.day == Weekday.MONDAY and button.syncing != self.weekday_sync['monday']:
+			if button.day == Weekday.MONDAY and button.syncing != self.weekday_sync[0]:
 				button.toggleSync()
 
-			elif button.day == Weekday.TUESDAY  and button.syncing != self.weekday_sync['tuesday']:
+			elif button.day == Weekday.TUESDAY  and button.syncing != self.weekday_sync[1]:
 				button.toggleSync()
 
-			elif button.day == Weekday.WEDNESDAY  and button.syncing != self.weekday_sync['wednesday']:
+			elif button.day == Weekday.WEDNESDAY  and button.syncing != self.weekday_sync[2]:
 				button.toggleSync()
 
-			elif button.day == Weekday.THURSDAY  and button.syncing != self.weekday_sync['thursday']:
+			elif button.day == Weekday.THURSDAY  and button.syncing != self.weekday_sync[3]:
 				button.toggleSync()
 
-			elif button.day == Weekday.FRIDAY  and button.syncing != self.weekday_sync['friday']:
+			elif button.day == Weekday.FRIDAY  and button.syncing != self.weekday_sync[4]:
 				button.toggleSync()
 
-			elif button.day == Weekday.SATURDAY  and button.syncing != self.weekday_sync['saturday']:
+			elif button.day == Weekday.SATURDAY  and button.syncing != self.weekday_sync[5]:
 				button.toggleSync()
 
-			elif button.day == Weekday.SUNDAY  and button.syncing != self.weekday_sync['sunday']:
+			elif button.day == Weekday.SUNDAY  and button.syncing != self.weekday_sync[6]:
 				button.toggleSync()
-
-		self.root.mainloop()
 
 	# Google Drive Option
 	def gdrive_mousedown(self):
 		self.p1.pack_forget()
 		self.p2.pack()
-		self.cloud = GDrive()
 		self.p2.pack_forget()
 		self.root.geometry("1000x600")
 		self.p3.pack(expand=True, fill='both')
@@ -71,33 +72,33 @@ class App:
 	def view_in_web(self):
 		webbrowser.open(self.cloud.homepage, new=2)
 
+	def backup(self, zipname, directory):
+		self.cloud.zipFolder(zipname, directory)
+		self.cloud.upload(zipname)
+
 	def update_syncdays(self, event):
 		for button in self.p3.buttons:
 			if button.day == Weekday.MONDAY:
-				self.weekday_sync['monday'] = button.syncing
+				self.options["days"][0]['monday'] = button.syncing
 
 			elif button.day == Weekday.TUESDAY:
-				self.weekday_sync['tuesday'] = button.syncing
+				self.options["days"][1]['tuesday'] = button.syncing
 
 			elif button.day == Weekday.WEDNESDAY:
-				self.weekday_sync['wednesday'] = button.syncing
+				self.options["days"][2]['wednesday'] = button.syncing
 
 			elif button.day == Weekday.THURSDAY:
-				self.weekday_sync['thursday'] = button.syncing
+				self.options["days"][3]['thursday'] = button.syncing
 
 			elif button.day == Weekday.FRIDAY:
-				self.weekday_sync['friday'] = button.syncing
+				self.options["days"][4]['friday'] = button.syncing
 
 			elif button.day == Weekday.SATURDAY:
-				self.weekday_sync['saturday'] = button.syncing
+				self.options["days"][5]['saturday'] = button.syncing
 
 			elif button.day == Weekday.SUNDAY:
-				self.weekday_sync['sunday'] = button.syncing
+				self.options["days"][6]['sunday'] = button.syncing
 
 			# Save updated JSON
-			with open('syncdays.json', 'w') as f:
-				f.write(json.dumps(self.weekday_sync))
-
-
-if __name__ == '__main__':
-	app = App()
+			with open('options.json', 'w') as f:
+				f.write(json.dumps(self.options, indent=4, separators=(',', ': ')))
